@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AACA,gEAAiE;EAC7D,OAAO,EAAE,IAAI",
-"sources": ["../scss/main.scss"],
-"names": [],
-"file": "main.css"
-}

@@ -7,6 +7,26 @@ task :test do
   Dir.glob("./tests/*_test.rb").each { |file| require file }
 end
 
+desc "Generate migration"
+namespace :generate do
+  task :migration do |name|
+    name = ARGV.pop
+    timenumber = Time.now.strftime "%Y%m%d%H%M%S"
+    file = "db/migrate/#{timenumber}_#{name.snake_case}.rb"
+
+    File.open file, "w" do |f|
+      f.puts %(
+class #{name} < ActiveRecord::Migration
+  def change
+  end
+end).strip
+    end
+
+    puts "Generated #{file}"
+    exit # otherwise rake will try to run the other arguments
+  end
+end
+
 # Temporary switch to blank rake app, extract required tasks and import them to
 # current rake task. Skip seed loader here, as we do not need it for tests.
 
@@ -19,7 +39,7 @@ def import_active_record_tasks(default_rake_app)
   include ActiveRecord::Tasks
 
   db_dir                               = File.expand_path("../db", __FILE__)
-  db_config_path                       = db_dir + "/database.yml"
+  db_config_path                       = File.expand_path("../config/database.yml", __FILE__)
   migrations_path                      = db_dir + "/migrations"
 
   # WARNING! This MUST be a String not a Symbol
