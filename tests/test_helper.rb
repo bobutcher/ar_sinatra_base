@@ -15,4 +15,5 @@ require "rack/test"
 
 # Project requires
 require "./lib/server"
+require "./lib/database"
 Dir.glob("./app/**/*.rb").each { |file| require file }
