@@ -1,2 +1,2 @@
-require_relative "app"
-run Server::Application
+require_relative "lib/server"
+run Server

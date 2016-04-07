@@ -13,4 +13,6 @@ end
 require "minitest/autorun"
 require "rack/test"
 
-require_relative "../app"
+# Project requires
+require "./lib/server"
+Dir.glob("./app/**/*.rb").each { |file| require file }

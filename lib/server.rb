@@ -10,4 +10,12 @@ require "pry"
 require "./lib/base_server"
 Dir.glob("./app/**/*.rb").each { |file| require file }
 
-binding.pry
+Tilt.register Tilt::ERBTemplate, "html.erb"
+
+class Server < Base
+  # Each controller should be listed below
+  
+  use ::Controller::Homepage
+end
+
+Server.run! if $PROGRAM_NAME == __FILE__

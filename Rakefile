@@ -1,6 +1,15 @@
 require "bundler/setup"
-
 require "active_record"
+
+class String
+  def snake_case
+    self.gsub(/::/, '/').
+      gsub(/([A-Z]+)([A-Z][a-z])/,'\1_\2').
+      gsub(/([a-z\d])([A-Z])/,'\1_\2').
+      tr("-", "_").
+      downcase
+  end
+end
 
 task default: :test
 task :test do
@@ -10,13 +19,13 @@ end
 desc "Generate migration"
 namespace :generate do
   task :migration do |name|
-    name = ARGV.pop
+    name = ARGV.pop.classify
     timenumber = Time.now.strftime "%Y%m%d%H%M%S"
-    file = "db/migrate/#{timenumber}_#{name.snake_case}.rb"
+    file = "db/migrations/#{timenumber}_#{name.snake_case}_migration.rb"
 
     File.open file, "w" do |f|
       f.puts %(
-class #{name} < ActiveRecord::Migration
+class #{name}Migration < ActiveRecord::Migration
   def change
   end
 end).strip
