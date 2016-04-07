@@ -17,4 +17,8 @@ class ServerTest < Minitest::Test
     response = get "/"
     assert response.ok?
   end
+
+  def test_
+
+  end
 end
