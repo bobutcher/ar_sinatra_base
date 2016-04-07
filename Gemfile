@@ -9,6 +9,7 @@ group :test, :development do
   gem "simplecov", require: false
   gem "minitest"
   gem "rack-test"
+  gem "sqlite3"
 end
 
 group :production do

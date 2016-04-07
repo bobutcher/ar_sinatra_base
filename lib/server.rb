@@ -8,7 +8,7 @@ require "pry"
 
 # Project requires
 require "./lib/base_server"
-require "./lib/database"
+require "./config/database"
 Dir.glob("./app/**/*.rb").each { |file| require file }
 
 Tilt.register Tilt::ERBTemplate, "html.erb"
