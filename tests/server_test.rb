@@ -3,6 +3,7 @@ require_relative "test_helper"
 class ServerTest < Minitest::Test
   include Rack::Test::Methods
 
+
   def setup
   end
 
@@ -16,9 +17,5 @@ class ServerTest < Minitest::Test
   def test_has_a_root_route
     response = get "/"
     assert response.ok?
-  end
-
-  def test_
-
   end
 end
